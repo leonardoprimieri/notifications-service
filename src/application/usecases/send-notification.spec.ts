@@ -1,9 +1,18 @@
 import { faker } from '@faker-js/faker';
+import { Notification } from '../entities/notification';
 import { SendNotification } from './send-notification';
+
+const notifications: Notification[] = [];
+
+const notificationsRepository = {
+  async create(notification: Notification) {
+    notifications.push(notification);
+  },
+};
 
 describe('Send Notification', () => {
   it('should be able to send a notification', async () => {
-    const sendNotification = new SendNotification();
+    const sendNotification = new SendNotification(notificationsRepository);
 
     const newNotification = {
       category: faker.random.word(),
@@ -11,10 +20,10 @@ describe('Send Notification', () => {
       recipientId: faker.random.alphaNumeric(20),
     };
 
-    const { notification } = await sendNotification.execute({
+    await sendNotification.execute({
       ...newNotification,
     });
 
-    expect(notification).toBeTruthy();
+    expect(notifications).toHaveLength(1);
   });
 });
