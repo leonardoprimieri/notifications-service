@@ -24,7 +24,6 @@
       "@helpers/*": ["./src/helpers/*"],
       "@infra/*": ["./src/infra/*"],
       "@test/*": ["./test/*"],
-
     }
   }
 }
