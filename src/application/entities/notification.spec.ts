@@ -8,8 +8,8 @@ describe('Notification', () => {
       category: faker.random.word(),
       content: new NotificationContent(faker.random.words(4)),
       recipientId: faker.random.alphaNumeric(),
-      readAt: faker.date.soon(),
     });
+
     expect(notification).toBeTruthy();
   });
 });
