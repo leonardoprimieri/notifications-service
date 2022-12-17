@@ -1,17 +1,11 @@
 import { faker } from '@faker-js/faker';
-import { Notification } from '../entities/notification';
+import { InMemoryNotificationsRepository } from '../../../test/repositories/in-memory-notifications-repository';
 import { SendNotification } from './send-notification';
-
-const notifications: Notification[] = [];
-
-const notificationsRepository = {
-  async create(notification: Notification) {
-    notifications.push(notification);
-  },
-};
 
 describe('Send Notification', () => {
   it('should be able to send a notification', async () => {
+    const notificationsRepository = new InMemoryNotificationsRepository();
+
     const sendNotification = new SendNotification(notificationsRepository);
 
     const newNotification = {
@@ -20,10 +14,11 @@ describe('Send Notification', () => {
       recipientId: faker.random.alphaNumeric(20),
     };
 
-    await sendNotification.execute({
+    const { notification } = await sendNotification.execute({
       ...newNotification,
     });
 
-    expect(notifications).toHaveLength(1);
+    expect(notificationsRepository.notifications).toHaveLength(1);
+    expect(notificationsRepository.notifications[0]).toEqual(notification);
   });
 });
