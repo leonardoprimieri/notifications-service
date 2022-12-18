@@ -1,4 +1,5 @@
 import { NotificationsRepository } from '@application/repositories/notifications-repository';
+import { Injectable } from '@nestjs/common';
 import { NotificationNotFoundError } from '../errors/notification-not-found-error';
 
 interface UnreadNotificationRequest {
@@ -7,6 +8,7 @@ interface UnreadNotificationRequest {
 
 type UnreadNotificationResponse = void;
 
+@Injectable()
 export class UnreadNotification {
   constructor(private notificationsRepository: NotificationsRepository) {}
 
