@@ -47,16 +47,16 @@ export class Notification {
     this.props.canceledAt = new Date();
   }
 
+  public read() {
+    this.props.readAt = new Date();
+  }
+
   public get createdAt(): Date {
     return this.props.createdAt;
   }
 
   public get readAt(): Date | null | undefined {
     return this.props.readAt;
-  }
-
-  public set readAt(readAt: Date | null | undefined) {
-    this.readAt = readAt;
   }
 
   public get recipientId(): string {
