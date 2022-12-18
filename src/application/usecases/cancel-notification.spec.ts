@@ -1,6 +1,7 @@
 import { Notification } from '@application/entities/notification';
 import { NotificationContent } from '@application/entities/notification-content';
 import { faker } from '@faker-js/faker';
+import { makeNotification } from '@test/factories/notification-factory';
 import { InMemoryNotificationsRepository } from '@test/repositories/in-memory-notifications-repository';
 import { CancelNotification } from './cancel-notification';
 import { NotificationNotFoundError } from './errors/notification-not-found-error';
@@ -10,11 +11,7 @@ describe('Cancel Notification', () => {
     const notificationsRepository = new InMemoryNotificationsRepository();
     const cancelNotification = new CancelNotification(notificationsRepository);
 
-    const notification = new Notification({
-      category: faker.random.word(),
-      content: new NotificationContent(faker.random.words()),
-      recipientId: faker.random.alphaNumeric(),
-    });
+    const notification = makeNotification();
 
     await notificationsRepository.create(notification);
 
