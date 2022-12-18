@@ -27,7 +27,7 @@ describe('Unread Notification', () => {
       notification.id,
     );
 
-    expect(foundNotification?.readAt).toEqual(null);
+    expect(foundNotification?.readAt).toBeNull();
   });
 
   it('should not be able to unread a notification that does not exists', () => {
