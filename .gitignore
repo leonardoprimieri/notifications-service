@@ -2,6 +2,8 @@
 /dist
 /node_modules
 
+kafka-producer/node_modules
+
 # Logs
 logs
 *.log
